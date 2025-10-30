@@ -60,3 +60,14 @@ def project_new(request):
 def project_edit(request, id):
     project = {"id": id, "name": "Proyecto X", "status": "inicio", "date": "2025-10-30"}
     return render(request, "proyectos/edit.html", {"project": project})
+
+def project_info(request, id):
+    # Ejemplo: datos de prueba
+    projects = [
+        {"id": 1, "name": "Proyecto A", "start_date": "2025-10-20", "days_passed": 9, "status": "Inicio", "details": "Detalles del proyecto A"},
+        {"id": 2, "name": "Proyecto B", "start_date": "2025-10-15", "days_passed": 14, "status": "Proceso", "details": "Detalles del proyecto B"},
+    ]
+    project = next((p for p in projects if p["id"] == id), None)
+    if not project:
+        return render(request, "proyectos/not_found.html")
+    return render(request, "proyectos/info.html", {"project": project})

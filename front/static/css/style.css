@@ -285,3 +285,96 @@ select.input {
     background-color: white !important;
     color: c8cad5 !important;
 }
+/*timeline*/
+
+.project-timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.project-timeline .step {
+  text-align: center;
+  position: relative;
+  flex: 1;
+}
+
+.project-timeline .circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #555; /* gris oscuro por defecto */
+  margin: 0 auto;
+  z-index: 1; /* siempre arriba de la línea */
+  position: relative;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.project-timeline .connector {
+  position: absolute;
+  top: 50%; /* alineado vertical con el centro del círculo */
+  left: 50%;
+  width: 100%;
+  height: 4px;
+  background-color: #555; /* gris por defecto */
+  z-index: 0; /* detrás del círculo */
+  transform: translateX(0%) translateY(-50%);
+  transition: background-color 0.3s;
+}
+
+.project-timeline .label {
+  margin-top: 8px;
+  color: #000;
+  font-weight: 500;
+}
+
+/* Conectores entre pasos */
+.project-timeline .connector {
+  position: absolute;
+  top: 15px; /* mitad del círculo */
+  left: 50%;
+  width: 100%;
+  height: 4px;
+  background-color: #555; /* gris por defecto */
+  z-index: 0;
+  transform: translateX(0%);
+  transition: background-color 0.3s;
+}
+
+/* Animación de pulso */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Círculos */
+.circle.active {
+  background-color: #4caf50;
+}
+
+.circle.pulsing {
+  background-color: #fbc74a;
+  animation: pulse 1.5s infinite; /* solo círculo */
+}
+
+/* Conectores */
+.connector.completed {
+  background-color: #4caf50;
+}
+
+.connector.connector-next {
+  background-color: #fbc74a; /* sin animación */
+}
+
+.connector.future {
+  background-color: #555;
+}
+
+/* Anulado */
+.project-timeline.red .circle,
+.project-timeline.red .connector {
+  background-color: #f44336 !important;
+}
