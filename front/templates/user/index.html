@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<div class="container mt-6">
+    <!-- Título + Botón Nuevo -->
+    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+        <div class="level-left">
+            <h1 class="title has-text-white">LISTADO DE USUARIOS</h1>
+        </div>
+    <div class="level-right">
+        <a href="{% url 'user_new' %}" class="button" style="background-color: #fbc74a; color: white;">
+            <span class="icon"><i class="fas fa-plus"></i></span>
+            <span>Agregar</span>
+        </a>
+    </div>
+    </div>
+    <!-- Input de búsqueda -->
+    <div class="field mb-4">
+        <div class="control has-icons-left">
+            <input class="input" type="text" id="searchInput" placeholder="Buscar usuarios..." style="background-color: #ffffff;color: #c8cad5;">
+            <span class="icon is-left">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <div class="table-container">
+        <table class="table is-fullwidth is-hoverable" id="usersTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.rut }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        {% if user.status == "activo" %}
+                            <span class="tag is-success" style="color:white">Activo</span>
+                        {% else %}
+                            <span class="tag is-danger" style="color:white">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'user_edit' user.id %}" class="button is-small is-info">
+                            <span class="icon"><i class="fas fa-edit"></i></span>
+                        </a>
+                        <button class="button is-small is-danger">
+                            <span class="icon"><i class="fas fa-trash"></i></span>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/user.js' %}"></script>
+{% endblock %}

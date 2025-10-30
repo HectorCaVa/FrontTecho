@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <!-- Carrusel -->
+    <div class="carousel">
+        <div class="carousel-item">
+            <img src="https://cl.techo.org/wp-content/uploads/sites/9/2025/07/banners-2572x1008-px-03-scaled.jpg" alt="Banner 1">
+        </div>
+        <div class="carousel-item">
+            <img src="https://cl.techo.org/wp-content/uploads/sites/9/2021/11/Thumbnail-1024x538.png" alt="Banner 2">
+        </div>
+        <div class="carousel-item">
+            <img src="https://media.licdn.com/dms/image/v2/C4E1BAQFSgYskHYKdPQ/company-background_10000/company-background_10000/0/1583973238326?e=2147483647&v=beta&t=UP_Qa1GhZFwdmkK9C0PbwZAFLYMSMfaP4ff02C_az58" alt="Banner 3">
+        </div>
+    </div>
+
+    <!-- Sección Resumen de Proyectos -->
+    <div class="section mt-6 mb-5" style="background-color: #50514f; padding: 2rem; border-radius: 8px;">
+        <div class="has-text-centered">
+            <h2 class="title has-text-white">RESUMEN DE PROYECTOS GESTIONADOS</h2>
+        </div>
+    </div>
+
+    <!-- Cards de resumen -->
+    <div class="columns is-multiline is-mobile">
+        <!-- TOTAL -->
+        <div class="column is-one-quarter">
+            <div class="box has-text-centered" style="background-color: #0091dd;">
+                <p class="title is-3">4</p>
+                <p class="subtitle">TOTAL</p>
+            </div>
+        </div>
+
+        <!-- PROCESO -->
+        <div class="column is-one-quarter">
+            <div class="box has-text-centered" style="background-color: #fbc74a; color: white;">
+                <p class="title is-3">30</p>
+                <p class="subtitle">PROCESO</p>
+            </div>
+        </div>
+
+        <!-- COMPLETO -->
+        <div class="column is-one-quarter">
+            <div class="box has-text-centered" style="background-color: #00bf63; color: white;">
+                <p class="title is-3">12</p>
+                <p class="subtitle">COMPLETO</p>
+            </div>
+        </div>
+
+        <!-- ANULADO -->
+        <div class="column is-one-quarter">
+            <div class="box has-text-centered" style="background-color: #ff5757; color: white;">
+                <p class="title is-3">15</p>
+                <p class="subtitle">ANULADO</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Proyectos{% endblock %}
+
+{% block content %}
+<div class="container mt-6">
+    <!-- Título + Botón Nuevo -->
+    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+        <div class="level-left">
+            <h1 class="title has-text-white">LISTADO DE PROYECTOS</h1>
+        </div>
+        <div class="level-right">
+            <a href="{% url 'project_new' %}" class="button" style="background-color: #fbc74a; color: white;">
+                <span class="icon"><i class="fas fa-plus"></i></span>
+                <span>Agregar proyecto</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="columns mb-4">
+        <div class="column">
+            <div class="field">
+                <div class="control has-icons-left">
+                    <input class="input" type="text" id="searchInput" placeholder="Buscar proyectos..." style="background-color: #ffffff; color: #000;">
+                    <span class="icon is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="date" id="dateFilter" style="background-color: #ffffff; color: #000;">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="statusFilter" style="background-color: #ffffff;">
+                            <option value="">Todos los estados</option>
+                            <option value="Inicio">Inicio</option>
+                            <option value="Aceptado">Aceptado</option>
+                            <option value="Proceso">Proceso</option>
+                            <option value="Completado">Completado</option>
+                            <option value="Anulado">Anulado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de proyectos -->
+    <div class="table-container">
+        <table class="table is-fullwidth is-hoverable" id="projectsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Días</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.name }}</td>
+                    <td>{{ project.start_date }}</td>
+                    <td>{{ project.days_passed}}</td>
+                    <td>{{ project.status }}</td>
+                    <td>
+                        <a href="{% url 'project_edit' project.id %}" class="button is-small is-info">
+                            <span class="icon"><i class="fas fa-edit"></i></span>
+                        </a>
+                        <button class="button is-small is-danger">
+                            <span class="icon"><i class="fas fa-trash"></i></span>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/project.js' %}"></script>
+{% endblock %}

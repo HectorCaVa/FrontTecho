@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Agregar Proyecto{% endblock %}
+
+{% block content %}
+<div class="container mt-6">
+    <!-- Título + Botón Volver -->
+    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+        <div class="level-left">
+            <h1 class="title has-text-white">AGREGAR NUEVO PROYECTO</h1>
+        </div>
+        <div class="level-right">
+            <a href="{% url 'project_index' %}" class="button" style="background-color: #ff4c4c; color: white;">
+                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                <span>Volver</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <form method="POST">
+        {% csrf_token %}
+        <div class="columns is-multiline">
+            <!-- Nombre -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="name" placeholder="Nombre del proyecto" required style="background-color:white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUT -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">RUT</label>
+                    <div class="control">
+                        <input class="input" type="text" name="rut" placeholder="RUT" required style="background-color:white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fecha -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Fecha</label>
+                    <div class="control">
+                        <input class="input" type="date" name="date" required style="background-color:white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estado -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Estado</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="status" required style="background-color:white;">
+                                <option value="">Seleccione estado</option>
+                                <option value="Inicio">Inicio</option>
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Proceso">Proceso</option>
+                                <option value="Completado">Completado</option>
+                                <option value="Anulado">Anulado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correo -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Correo</label>
+                    <div class="control">
+                        <input class="input" type="email" name="email" placeholder="Correo" required style="background-color:white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Teléfono</label>
+                    <div class="control">
+                        <input class="input" type="tel" name="phone" placeholder="Teléfono" required style="background-color:white;">
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Tabla de archivos -->
+
+    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+        <div class="level-left">
+            <h1 class="title has-text-white">Archivos del Proyecto</h1>
+        </div>
+    </div>
+    <!-- Input para subir archivos -->
+    <div class="field">
+        <div class="control">
+            <input class="input" type="file" name="project_files" id="projectFiles" multiple>
+        </div>
+    </div>
+
+    <!-- Tabla de archivos -->
+    <div class="table-container mt-3">
+        <table class="table is-fullwidth is-hoverable" id="filesTable">
+            <thead>
+                <tr>
+                    <th>Nombre del archivo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán los archivos subidos dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+</div>  
+        <!-- Botón Guardar -->
+        <div class="field is-grouped is-grouped-right mt-4">
+            <div class="control">
+                <button type="submit" class="button" style="background-color:#fbc74a; color:white;">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-6">
+
+    <!-- Título + Botón Volver -->
+    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+        <div class="level-left">
+            <h1 class="title has-text-white">Agregar Nuevo Usuario</h1>
+        </div>
+        <div class="level-right">
+            <a href="{% url 'user_index' %}" class="button is-danger " style="color: white;">
+                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                <span>Volver</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <form>
+        <div class="columns is-multiline">
+            <!-- Nombre -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Nombre completo" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- RUT -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">RUT</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="RUT" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correo -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Correo</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="Correo electrónico" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Teléfono</label>
+                    <div class="control">
+                        <input class="input" type="tel" placeholder="Teléfono" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fecha de Nacimiento -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Fecha de Nacimiento</label>
+                    <div class="control">
+                        <input class="input" type="date" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <label class="label">Contraseña</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="Contraseña" style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- Sección Permisos -->
+<div class="level mb-4 mt-5" style="padding: 1rem; border-radius: 8px; background-color: #0091dd;">
+    <div class="level-left">
+        <h2 class="title has-text-white is-5">Permisos</h2>
+    </div>
+</div>
+
+<!-- Tabla de permisos -->
+<div class="table-container">
+    <table class="table is-fullwidth">
+        <thead>
+            <tr>
+                <th>Módulo</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Usuario</td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+            </tr>
+            <tr>
+                <td>Proyecto</td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+            </tr>
+            <tr>
+                <td>Comentarios</td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+                <td><input type="checkbox" class="perm-check"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+        <div class="field mt-4 level-right">
+            <div class="control">
+                <button class="button is-success" style="color: white;">Guardar</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

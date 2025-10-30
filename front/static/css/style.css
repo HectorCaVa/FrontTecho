@@ -1,0 +1,287 @@
+body {
+    background-color: #c8cad5; /* 👈 color de fondo */
+    min-height: 100vh;
+    transition: margin-left 0.3s;
+}
+
+/* Header */
+.header {
+    background-color: #0091dd;
+    height: 60px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* izquierda y derecha */
+    padding: 0 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 40;
+}
+/* Secciones internas del header */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espacio entre burger y TECHO */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Burger button */
+.burger {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 100;
+}
+.burger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 3px 0;
+    transition: 0.4s;
+}
+/* Botones de usuario y salir */
+.btn-user,
+.btn-logout {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-user {
+    background-color: #ffffff;
+    color: #0091dd;
+}
+
+.btn-user:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+/* Sidebar */
+.sidebar {
+    background-color: #e3ecf5;
+    min-height: 100vh;
+    padding-top: 1rem;
+    width: 220px;
+    position: fixed;
+    top: 60px; /* debajo del header */
+    left: 0;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 30;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #333;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.is-active {
+    background-color: #fbc74a;
+    color: white;
+}
+
+/* Ocultar sidebar */
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+/* Main content */
+.main-content {
+    background-color: #c8cad5; /* mantiene el mismo color que el fondo */
+    margin-left: 220px;
+    padding: 2rem;
+    padding-top: 80px;
+    transition: margin-left 0.3s;
+}
+
+body.sidebar-hidden .main-content {
+    margin-left: 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 80px;
+    }
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    height: 200px; /* altura fija para todas las imágenes */
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* asegura que la imagen llene el cuadro sin deformarse */
+    border-radius: 8px;
+}
+
+/* La primera imagen visible */
+.carousel-item:first-child {
+    opacity: 1;
+}
+/* Resumen de proyectos */
+.section .box {
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.2s;
+}
+
+.section .box:hover {
+    transform: translateY(-5px);
+}
+/* Placeholder del input de búsqueda */
+#searchInput::placeholder {
+    color: #c8cad5;  /* negro para que se note más */
+    opacity: 1;       /* fuerza la visibilidad */
+}
+/* Color del placeholder para inputs */
+input::placeholder {
+    color: #c8cad5; /* el color que quieras */
+    opacity: 1; /* importante para que se vea consistente */
+}
+
+/* Para compatibilidad con algunos navegadores antiguos */
+input::-webkit-input-placeholder {
+    color: #c8cad5;
+}
+input::-moz-placeholder {
+    color: #c8cad5;
+}
+input:-ms-input-placeholder {
+    color: #c8cad5;
+}
+input:-moz-placeholder {
+    color: #c8cad5;
+}
+/* Inputs de user/new.html */
+.container input.input {
+    background-color: #ffffff !important; /* fondo blanco */
+    color: #c8cad5 !important; /* texto negro */
+}
+
+/* Placeholder */
+.container input.input::placeholder {
+    color: #c8cad5 !important; /* gris para placeholder */
+    opacity: 1 !important;
+}
+
+/* Compatibilidad navegadores */
+.container input.input::-webkit-input-placeholder {
+    color: #c8cad5 !important;
+}
+.container input.input::-moz-placeholder {
+    color: #c8cad5 !important;
+}
+.container input.input:-ms-input-placeholder {
+    color: #c8cad5 !important;
+}
+.container input.input:-moz-placeholder {
+    color: #c8cad5 !important;
+}
+
+
+/* Tabla completa */
+.table.is-fullwidth {
+    background-color: transparent; /* tabla sin fondo */
+    border-collapse: collapse;     /* eliminar bordes extra */
+}
+
+/* Encabezados (primera fila) */
+.table.is-fullwidth thead th {
+    background-color: #0091dd; /* azul */
+    color: white;              /* texto blanco */
+    border: none;              /* sin bordes */
+    text-align: left;
+    padding: 0.75rem 1rem;
+}
+
+/* Filas del tbody (celdas transparentes) */
+.table.is-fullwidth tbody td {
+    background-color: transparent; /* sin fondo */
+    color: black;                  /* texto negro */
+    border: none;                  /* sin divisores */
+    padding: 0.75rem 1rem;
+}
+
+/* Hover sobre filas */
+.table.is-fullwidth tbody tr:hover td {
+    background-color: #c8cad5; /* amarillo al pasar mouse */
+    color: white;              /* texto blanco */
+}
+
+/* Checkboxes circulares */
+.perm-check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Checkbox activado */
+.perm-check:checked {
+    background-color: #00bf63; /* verde */
+    border-color: #00bf63;
+}
+
+select.input {
+    background-color: white;
+    color: c8cad5;
+}
+.select select {
+    background-color: white !important;
+    color: c8cad5 !important;
+}
