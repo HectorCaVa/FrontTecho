@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
@@ -24,37 +24,59 @@
     </div>
 
     <!-- Cards de resumen -->
-    <div class="columns is-multiline is-mobile">
-        <!-- TOTAL -->
-        <div class="column is-one-quarter">
-            <div class="box has-text-centered" style="background-color: #0091dd;">
-                <p class="title is-3">4</p>
-                <p class="subtitle">TOTAL</p>
-            </div>
-        </div>
-
-        <!-- PROCESO -->
-        <div class="column is-one-quarter">
-            <div class="box has-text-centered" style="background-color: #fbc74a; color: white;">
-                <p class="title is-3">30</p>
-                <p class="subtitle">PROCESO</p>
-            </div>
-        </div>
-
-        <!-- COMPLETO -->
-        <div class="column is-one-quarter">
-            <div class="box has-text-centered" style="background-color: #00bf63; color: white;">
-                <p class="title is-3">12</p>
-                <p class="subtitle">COMPLETO</p>
-            </div>
-        </div>
-
-        <!-- ANULADO -->
-        <div class="column is-one-quarter">
-            <div class="box has-text-centered" style="background-color: #ff5757; color: white;">
-                <p class="title is-3">15</p>
-                <p class="subtitle">ANULADO</p>
-            </div>
+<div class="columns is-multiline is-mobile is-variable is-1">
+    <!-- TOTAL -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #0091dd;">
+            <p class="title is-3" id="total">0</p>
+            <p class="subtitle">TOTAL</p>
         </div>
     </div>
+
+    <!-- INGRESADA -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #50514f; color: white;">
+            <p class="title is-3" id="ingresada">0</p>
+            <p class="subtitle">INGRESADA</p>
+        </div>
+    </div>
+
+    <!-- ACEPTADA -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #fbc74a; color: white;">
+            <p class="title is-3" id="aceptada">0</p>
+            <p class="subtitle">ACEPTADA</p>
+        </div>
+    </div>
+
+    <!-- PROCESO -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #fbc74a; color: white;">
+            <p class="title is-3" id="proceso">0</p>
+            <p class="subtitle">PROCESO</p>
+        </div>
+    </div>
+
+    <!-- COMPLETA -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #00bf63; color: white;">
+            <p class="title is-3" id="completa">0</p>
+            <p class="subtitle">COMPLETA</p>
+        </div>
+    </div>
+
+    <!-- ANULADO -->
+    <div class="column is-one-sixth">
+        <div class="box has-text-centered" style="background-color: #ff5757; color: white;">
+            <p class="title is-3" id="anulado">0</p>
+            <p class="subtitle">ANULADO</p>
+        </div>
+    </div>
+</div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

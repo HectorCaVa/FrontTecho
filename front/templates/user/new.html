@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Agregar Usuario{% endblock %}
 
 {% block content %}
@@ -19,68 +19,95 @@
     </div>
 
     <!-- Formulario -->
-    <form>
-        <div class="columns is-multiline">
-            <!-- Nombre -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Nombre</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Nombre completo" style="background-color: white;">
-                    </div>
+    <form id="userForm">
+    <div class="columns is-multiline">
+        <!-- Nombre -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="first_name" type="text" placeholder="Nombre" style="background-color: white;">
                 </div>
             </div>
+        </div>
 
-            <!-- RUT -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">RUT</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="RUT" style="background-color: white;">
-                    </div>
+        <!-- Apellido Paterno -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="last_name" type="text" placeholder="Apellido Paterno" style="background-color: white;">
                 </div>
             </div>
+        </div>
 
-            <!-- Correo -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Correo</label>
-                    <div class="control">
-                        <input class="input" type="email" placeholder="Correo electrónico" style="background-color: white;">
-                    </div>
+        <!-- Apellido Materno -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="apellido_materno" type="text" placeholder="Apellido Materno" style="background-color: white;">
                 </div>
             </div>
+        </div>
 
-            <!-- Teléfono -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Teléfono</label>
-                    <div class="control">
-                        <input class="input" type="tel" placeholder="Teléfono" style="background-color: white;">
-                    </div>
+        <!-- RUT -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="rut" type="text" placeholder="RUT" style="background-color: white;">
                 </div>
             </div>
+        </div>
 
-            <!-- Fecha de Nacimiento -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Fecha de Nacimiento</label>
-                    <div class="control">
-                        <input class="input" type="date" style="background-color: white;">
-                    </div>
+        <!-- Correo -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="email" type="email" placeholder="Correo electrónico" style="background-color: white;">
                 </div>
             </div>
+        </div>
 
-            <!-- Contraseña -->
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Contraseña</label>
-                    <div class="control">
-                        <input class="input" type="password" placeholder="Contraseña" style="background-color: white;">
+        <!-- Teléfono -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="telefono" type="tel" placeholder="Teléfono" style="background-color: white;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Fecha de Nacimiento -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="fecha_nacimiento" type="date" style="background-color: white;">
+                </div>
+            </div>
+        </div>
+        <!-- Sexo -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="sexo">
+                            <option value="" selected>Selecciona sexo</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="O">Otro</option>
+                        </select>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Contraseña -->
+        <div class="column is-one-third">
+            <div class="field">
+                <div class="control">
+                    <input class="input" id="password" type="password" placeholder="Contraseña" style="background-color: white;">
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Sección Permisos -->
 <div class="level mb-4 mt-5" style="padding: 1rem; border-radius: 8px; background-color: #0091dd;">
     <div class="level-left">
@@ -121,12 +148,15 @@
         </tbody>
     </table>
 </div>
-        <div class="field mt-4 level-right">
-            <div class="control">
-                <button class="button is-success" style="color: white;">Guardar</button>
-            </div>
+    <div class="field mt-4 level-right">
+        <div class="control">
+            <button type="submit" class="button is-success has-text-white" style="color: white;">Guardar</button>
         </div>
+    </div>
     </form>
 
 </div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/user_new.js' %}"></script>
 {% endblock %}

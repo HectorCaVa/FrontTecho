@@ -378,3 +378,60 @@ select.input {
 .project-timeline.red .connector {
   background-color: #f44336 !important;
 }
+
+/* === Estilo unificado para todos los campos de formulario === */
+input,
+select,
+textarea {
+    background-color: #ffffff !important; /* mismo fondo que tus inputs */
+    color: #c8cad5 !important;           /* mismo color de texto que tus inputs */
+    border: 1px solid #ccc;              /* borde suave */
+    border-radius: 6px;                  /* borde redondeado */
+    padding: 0.5rem 0.75rem;             /* padding interno */
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #c8cad5 !important;
+    opacity: 1 !important;
+}
+
+/* Compatibilidad navegadores antiguos */
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder { color: #c8cad5 !important; }
+input::-moz-placeholder,
+textarea::-moz-placeholder { color: #c8cad5 !important; }
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder { color: #c8cad5 !important; }
+input:-moz-placeholder,
+textarea:-moz-placeholder { color: #c8cad5 !important; }
+
+/* Focus (cuando el usuario escribe) */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #0091dd; /* borde azul al seleccionar */
+    box-shadow: 0 0 5px rgba(0, 145, 221, 0.5);
+    background-color: #ffffff;
+    color: #c8cad5;
+}
+
+/* Selects estilo uniforme con Bulma */
+.select select {
+    background-color: #ffffff !important;
+    color: #c8cad5 !important;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+}
+
+/* Textarea */
+textarea {
+    min-height: 80px; /* altura mínima uniforme */
+    resize: vertical; /* permite redimensionar solo vertical */
+}

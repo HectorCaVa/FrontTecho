@@ -12,116 +12,87 @@
         <div class="level-right">
             <a href="{% url 'project_index' %}" class="button is-danger has-text-white">
                 <span class="icon"><i class="fas fa-arrow-left"></i></span>
-                <span>Volver</span>
             </a>
         </div>
     </div>
 
     <!-- Formulario de proyecto -->
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div id="projectEditForm">
+        <input type="hidden" id="solicitud_id">
+
         <div class="columns is-multiline">
             <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Nombre</label>
-                    <div class="control">
-                        <input class="input" type="text" name="name" value="{{ project.name }}">
-                    </div>
+                <label class="label">Nombre</label>
+                <input class="input" type="text" id="sca_titulo">
+            </div>
+
+            <div class="column is-one-third">
+                <label class="label">RUT</label>
+                <input class="input" type="text" id="rut">
+            </div>
+
+            <div class="column is-one-third">
+                <label class="label">Fecha</label>
+                <input class="input" type="date" id="date">
+            </div>
+
+            <div class="column is-one-third">
+                <label class="label">Estado</label>
+                <input type="hidden" id="estadoActual">
+                <div class="select is-fullwidth">
+                    <select id="estadoSelect" required>
+                        <option value="">Cargando estados...</option>
+                    </select>
                 </div>
             </div>
+
             <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">RUT</label>
-                    <div class="control">
-                        <input class="input" type="text" name="rut" value="{{ project.rut }}">
-                    </div>
-                </div>
+                <label class="label">Correo</label>
+                <input class="input" type="email" id="email">
             </div>
+
             <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Fecha</label>
-                    <div class="control">
-                        <input class="input" type="date" name="date" value="{{ project.date }}">
-                    </div>
-                </div>
+                <label class="label">Teléfono</label>
+                <input class="input" type="text" id="phone">
             </div>
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Estado</label>
-                    <div class="control">
-                        <div class="select is-fullwidth">
-                            <select name="status">
-                                <option value="Inicio" {% if project.status == "Inicio" %}selected{% endif %}>Inicio</option>
-                                <option value="Aceptado" {% if project.status == "Aceptado" %}selected{% endif %}>Aceptado</option>
-                                <option value="Proceso" {% if project.status == "Proceso" %}selected{% endif %}>Proceso</option>
-                                <option value="Completado" {% if project.status == "Completado" %}selected{% endif %}>Completado</option>
-                                <option value="Anulado" {% if project.status == "Anulado" %}selected{% endif %}>Anulado</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Correo</label>
-                    <div class="control">
-                        <input class="input" type="email" name="email" value="{{ project.email }}">
-                    </div>
-                </div>
-            </div>
-            <div class="column is-one-third">
-                <div class="field">
-                    <label class="label">Teléfono</label>
-                    <div class="control">
-                        <input class="input" type="text" name="phone" value="{{ project.phone }}">
-                    </div>
-                </div>
+
+            <div class="column is-full">
+                <label class="label">Descripción</label>
+                <textarea class="textarea" id="sca_descripcion" style="background-color:white;"></textarea>
             </div>
         </div>
 
-        <!-- Tabla de archivos -->
-        <div class="mt-5">
-<div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
-            <h2 class="title is-5">Archivos del Proyecto</h2>
-</div>
-            <!-- Input para subir nuevos archivos -->
-            <div class="field">
-                <div class="control">
-                    <input class="input" type="file" name="project_files" id="projectFiles" multiple>
-                </div>
+        <!-- Archivos existentes -->
+        <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+            <div class="level-left">
+                <h2 class="title is-5">Archivos del Proyecto</h2>
             </div>
+        </div>
 
-            <!-- Tabla de archivos existentes y nuevos -->
-            <div class="table-container mt-3">
-                <table class="table is-fullwidth is-hoverable" id="filesTable">
-                    <thead>
-                        <tr>
-                            <th>Nombre del archivo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for file in project.files %}
-                        <tr>
-                            <td>{{ file.name }}</td>
-                            <td>
-                                <a href="{{ file.url }}" target="_blank" class="button is-small is-info mr-2">Ver</a>
-                                <button type="button" class="button is-small is-danger existing-file" data-file-id="{{ file.id }}">Eliminar</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-container mt-3">
+            <table class="table is-fullwidth is-hoverable" id="filesTable">
+                <thead>
+                    <tr>
+                        <th>Nombre del archivo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Archivos existentes se llenarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Input para agregar nuevos archivos (opcional) -->
+        <div class="field">
+            <input class="input" type="file" id="projectFiles" multiple>
         </div>
 
         <!-- Botón Guardar -->
-        <div class="field mt-5">
-            <div class="control has-text-right">
-                <button type="submit" class="button is-success has-text-white">Guardar</button>
-            </div>
+        <div class="field mt-5 has-text-right">
+            <button id="guardarBtn" class="button is-success has-text-white">Guardar</button>
         </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
 

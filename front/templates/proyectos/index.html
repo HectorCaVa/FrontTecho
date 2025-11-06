@@ -11,9 +11,8 @@
             <h1 class="title has-text-white">LISTADO DE PROYECTOS</h1>
         </div>
         <div class="level-right">
-            <a href="{% url 'project_new' %}" class="button" style="background-color: #fbc74a; color: white;">
+            <a href="{% url 'project_new' %}" class="button" style="background-color: #fbc74a; color: white; border: 2px solid #fbc74a;">
                 <span class="icon"><i class="fas fa-plus"></i></span>
-                <span>Agregar proyecto</span>
             </a>
         </div>
     </div>
@@ -42,12 +41,6 @@
                 <div class="control">
                     <div class="select is-fullwidth">
                         <select id="statusFilter" style="background-color: #ffffff;">
-                            <option value="">Todos los estados</option>
-                            <option value="Inicio">Inicio</option>
-                            <option value="Aceptado">Aceptado</option>
-                            <option value="Proceso">Proceso</option>
-                            <option value="Completado">Completado</option>
-                            <option value="Anulado">Anulado</option>
                         </select>
                     </div>
                 </div>
@@ -77,15 +70,15 @@
                     <td>{{ project.days_passed}}</td>
                     <td>{{ project.status }}</td>
                     <td>
-                        <a href="{% url 'project_edit' project.id %}" class="button is-small is-info">
-                            <span class="icon"><i class="fas fa-edit"></i></span>
-                        </a>
-                        <a href="{% url 'project_info' project.id %}" class="button is-small" style="background-color: #fbc74a; color: white;">
-                            <span class="icon"><i class="fas fa-info-circle"></i></span>
-                        </a>
-                        <button class="button is-small is-danger">
-                            <span class="icon"><i class="fas fa-trash"></i></span>
-                        </button>
+                    <button class="button is-small is-info">
+                        <span class="icon"><i class="fas fa-edit"></i></span>
+                    </button>
+                    <button class="button is-small" style="background-color: #fbc74a; color: white;">
+                        <span class="icon"><i class="fas fa-info-circle"></i></span>
+                    </button>
+                    <button class="button is-small is-danger">
+                        <span class="icon"><i class="fas fa-trash"></i></span>
+                    </button>
                     </td>
                 </tr>
                 {% endfor %}

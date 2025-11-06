@@ -1,73 +1,97 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from datetime import datetime
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
-def inicio(request):
-    return render(request, 'inicio.html')
+# ------------------------------
+# LOGIN / LOGOUT
+# ------------------------------
+
+def login_view(request):
+    """
+    Vista de inicio de sesión
+    """
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')  # redirige a la vista principal tras iniciar sesión
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos')
+
+    return render(request, 'login.html')  # tu template está en front/templates/login.html
+
+
+def logout_view(request):
+    """
+    Cierra la sesión y redirige al login
+    """
+    logout(request)
+    return redirect('login')
+
+
+# ------------------------------
+# VISTAS PRINCIPALES
+# ------------------------------
+
+@login_required(login_url='login')
+def dashboard(request):
+    """
+    Vista principal protegida (solo usuarios logueados)
+    """
+    return render(request, 'front/inicio.html')
+
 
 def home(request):
     return render(request, 'home/index.html')
 
+
 def galeria(request):
     return render(request, 'galeria/index.html')
+
+
+# ------------------------------
+# VISTAS DE USUARIO
+# ------------------------------
 
 def user_new(request):
     return render(request, 'user/new.html')
 
+
 def user_index(request):
-    users = [
-        {"id": 1, "rut": "20.123.456-7", "name": "Juan Pérez", "email": "juan@example.com", "status": "activo"},
-        {"id": 2, "rut": "18.765.432-1", "name": "María López", "email": "maria@example.com", "status": "inactivo"},
-        {"id": 3, "rut": "19.876.543-2", "name": "Carlos Díaz", "email": "carlos@example.com", "status": "activo"},
-    ]
-    return render(request, 'user/index.html', {"users": users})
-    
+    return render(request, 'user/index.html')
+
+
 def user_edit(request, id):
-    users = [
-        {"id": 1, "rut": "20.123.456-7", "name": "Juan Pérez", "email": "juan@example.com", "status": "activo"},
-        {"id": 2, "rut": "18.765.432-1", "name": "María López", "email": "maria@example.com", "status": "inactivo"},
-        {"id": 3, "rut": "19.876.543-2", "name": "Carlos Díaz", "email": "carlos@example.com", "status": "activo"},
-    ]
-
-    user = next((u for u in users if u["id"] == id), None)
-    if not user:
-        return render(request, "user/not_found.html")
-
     permisos = [
         {"name": "Usuario", "view": True, "edit": False, "delete": False},
         {"name": "Proyecto", "view": True, "edit": True, "delete": False},
         {"name": "Comentarios", "view": True, "edit": False, "delete": True},
     ]
 
-    return render(request, "user/edit.html", {"user": user, "permisos": permisos})
+    return render(request, "user/edit.html", {"permisos": permisos})
+
+
+# ------------------------------
+# VISTAS DE PROYECTOS
+# ------------------------------
+
 
 def project_index(request):
-    projects = [
-        {"id": 1, "name": "Proyecto A", "client": "Cliente X", "start_date": "2025-10-01", "status": "Inicio"},
-        {"id": 2, "name": "Proyecto B", "client": "Cliente Y", "start_date": "2025-09-15", "status": "Aceptado"},
-        {"id": 3, "name": "Proyecto C", "client": "Cliente Z", "start_date": "2025-08-20", "status": "Proceso"},
-    ]
-    # Agregar días transcurridos
-    today = datetime.today().date()
-    for project in projects:
-        project_date = datetime.strptime(project["start_date"], "%Y-%m-%d").date()
-        project["days_passed"] = (today - project_date).days
+    return render(request, 'proyectos/index.html')
 
-    return render(request, 'proyectos/index.html', {"projects": projects})
 
 def project_new(request):
     return render(request, "proyectos/new.html")
 
+
 def project_edit(request, id):
-    project = {"id": id, "name": "Proyecto X", "status": "inicio", "date": "2025-10-30"}
-    return render(request, "proyectos/edit.html", {"project": project})
+    return render(request, "proyectos/edit.html")
+
 
 def project_info(request, id):
-    # Ejemplo: datos de prueba
-    projects = [
-        {"id": 1, "name": "Proyecto A", "start_date": "2025-10-20", "days_passed": 9, "status": "Inicio", "details": "Detalles del proyecto A"},
-        {"id": 2, "name": "Proyecto B", "start_date": "2025-10-15", "days_passed": 14, "status": "Proceso", "details": "Detalles del proyecto B"},
-    ]
-    project = next((p for p in projects if p["id"] == id), None)
-    if not project:
-        return render(request, "proyectos/not_found.html")
-    return render(request, "proyectos/info.html", {"project": project})
+    return render(request, "proyectos/info.html")

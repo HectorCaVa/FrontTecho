@@ -12,9 +12,8 @@
             <h1 class="title has-text-white">Editar Usuario</h1>
         </div>
         <div class="level-right">
-            <a href="{% url 'user_index' %}" class="button" style="background-color: #ff5757; color: white;">
+            <a href="{% url 'user_index' %}" class="button is-danger" style=" color: white;">
                 <span class="icon"><i class="fas fa-arrow-left"></i></span>
-                <span>Volver</span>
             </a>
         </div>
     </div>
@@ -27,9 +26,26 @@
             <!-- Nombre -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">Nombre</label>
                     <div class="control">
                         <input class="input" type="text" name="name" value="{{ user.name }}" placeholder="Nombre" style="background-color: #ffffff;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apellido Paterno -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" name="apellido_paterno" value="{{ user.apellido_paterno }}" placeholder="Apellido Paterno" style="background-color: #ffffff;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apellido Materno -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" name="apellido_materno" value="{{ user.apellido_materno|default:'' }}" placeholder="Apellido Materno" style="background-color: #ffffff;">
                     </div>
                 </div>
             </div>
@@ -37,7 +53,6 @@
             <!-- RUT -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">RUT</label>
                     <div class="control">
                         <input class="input" type="text" name="rut" value="{{ user.rut }}" placeholder="RUT" style="background-color: #ffffff;">
                     </div>
@@ -47,7 +62,6 @@
             <!-- Correo -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">Correo</label>
                     <div class="control">
                         <input class="input" type="email" name="email" value="{{ user.email }}" placeholder="Correo" style="background-color: #ffffff;">
                     </div>
@@ -57,7 +71,6 @@
             <!-- Teléfono -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">Teléfono</label>
                     <div class="control">
                         <input class="input" type="text" name="phone" value="{{ user.phone|default:'' }}" placeholder="Teléfono" style="background-color: #ffffff;">
                     </div>
@@ -67,17 +80,33 @@
             <!-- Fecha de Nacimiento -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">Fecha de Nacimiento</label>
                     <div class="control">
                         <input class="input" type="date" name="birthdate" value="{{ user.birthdate|default:'' }}" style="background-color: #ffffff;">
                     </div>
                 </div>
             </div>
 
+            <!-- Sexo -->
+            <div class="column is-one-third">
+                <div class="field">
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select name="sexo">
+                                <option value="" {% if not user.sexo %}selected{% endif %}>Selecciona sexo</option>
+                                <option value="M" {% if user.sexo == "M" %}selected{% endif %}>Masculino</option>
+                                <option value="F" {% if user.sexo == "F" %}selected{% endif %}>Femenino</option>
+                                <option value="O" {% if user.sexo == "O" %}selected{% endif %}>Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- Contraseña -->
             <div class="column is-one-third">
                 <div class="field">
-                    <label class="label">Contraseña</label>
                     <div class="control">
                         <input class="input" type="password" name="password" placeholder="Contraseña" style="background-color: #ffffff;">
                     </div>
@@ -92,6 +121,7 @@
             </div>
         </div>
 
+        <!-- Tabla de permisos -->
         <table class="table is-fullwidth is-bordered">
             <thead>
                 <tr>
@@ -122,32 +152,15 @@
         <!-- Botón Guardar -->
         <div class="field is-grouped is-grouped-right mt-5">
             <div class="control">
-                <button type="submit" class="button" style="background-color: #00bf63; color: white;">
-                    <span class="icon"><i class="fas fa-save"></i></span>
+                <button type="submit" class="button is-success has-text-white" style=" color: white;">
                     <span>Guardar</span>
                 </button>
             </div>
         </div>
     </form>
-
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'js/user.js' %}"></script>
-<script>
-    // Activar color verde en los checkboxes al hacer click
-    document.addEventListener("DOMContentLoaded", function() {
-        const checkboxes = document.querySelectorAll(".checkbox-perm");
-        checkboxes.forEach(cb => {
-            cb.addEventListener("change", function() {
-                if(cb.checked){
-                    cb.parentElement.style.backgroundColor = "#00bf63";
-                } else {
-                    cb.parentElement.style.backgroundColor = "transparent";
-                }
-            });
-        });
-    });
-</script>
+<script src="{% static 'js/user_edit.js' %}"></script>
 {% endblock %}

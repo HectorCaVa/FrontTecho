@@ -1,62 +1,228 @@
+/*bitacora*/
+.bitacoras-chat {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.bitacora-message {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: #e0e7ff;
+}
+
+.bitacora-header {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+}
+
+.bitacora-observacion {
+    font-size: 1rem;
+    color: #222;
+}
+
+.bitacora-documentos a {
+    display: inline-block;
+    margin-top: 0.25rem;
+    margin-right: 0.25rem;
+    font-size: 0.85rem;
+    color: #0091dd;
+    text-decoration: underline;
+}
+/*timeline*/
 .project-timeline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    position: relative;
 }
 
-.project-timeline .step {
-  text-align: center;
-  flex: 1;
-  position: relative;
+.step {
+    text-align: center;
+    flex: 1;
+    position: relative;
 }
 
-.project-timeline .step .circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #ccc;
-  margin: 0 auto;
-  transition: background-color 0.3s, transform 0.3s;
-  z-index: 1;
+.step .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 auto;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
 }
 
-.project-timeline .step .label {
-  margin-top: 8px;
-  font-size: 0.9rem;
+.step .label {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
 }
 
-.project-timeline .line {
-  position: absolute;
-  top: 15px; /* mitad del círculo */
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background-color: #ccc;
-  z-index: 0;
+.step .connector {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    width: 100%;
+    height: 4px;
+    background-color: #ccc;
+    z-index: -1;
 }
 
-.project-timeline .circle.active {
-  background-color: #4caf50; /* verde */
+.step:last-child .connector {
+    display: none;
 }
 
-.project-timeline .circle.pulsing {
-  background-color: #fbc74a;
-  animation: pulse 1.5s infinite;
+.step.active .circle {
+    background-color: #00c853; /* verde */
 }
 
-.project-timeline .circle.cancelled {
-  background-color: #f44336; /* rojo */
+.step.completed .connector {
+    background-color: #00c853; /* verde */
 }
 
-.project-timeline .step.completed .circle {
-  background-color: #4caf50;
+.step.future .circle {
+    background-color: #ccc;
 }
 
-/* Animación de pulso */
+.step.anulado .circle {
+    background-color: #f44336; /* rojo */
+}
+
+.step.anulado .connector {
+    background-color: #f44336;
+}
+.step {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    margin-right: 30px;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 auto;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.circle.active {
+    background-color: green;
+}
+
+.circle.pulsing {
+    animation: pulse 1.2s infinite;
+}
+
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0.7);}
+    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(0, 128, 0, 0);}
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);}
+}
+
+.connector {
+    position: absolute;
+    top: 15px;
+    left: 100%;
+    width: 50px;
+    height: 4px;
+    background-color: #ccc;
+}
+
+.connector.completed {
+    background-color: green;
+}
+
+.connector.future {
+    background-color: #ccc;
+}
+
+.connector.red {
+    background-color: red;
+}
+
+.step.anulado .circle {
+    background-color: red;
+    animation: pulse-red 1.2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);}
+    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(255, 0, 0, 0);}
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);}
+}
+/* Contenedor timeline */
+#projectTimeline {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+/* Línea base */
+.timeline-line {
+    position: absolute;
+    top: 15px; /* mitad de la altura de los círculos */
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #ccc;
+    z-index: 1;
+}
+
+/* Paso */
+.step {
+    position: relative;
+    text-align: center;
+    flex: 1;
+    z-index:2;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 auto;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    z-index: 2;
+    position: relative;
+}
+
+.circle.pulsing {
+    animation: pulse 1.2s infinite;
+}
+
+.circle.pulsing-red {
+    animation: pulse-red 1.2s infinite;
+}
+
+.label {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0.7);}
+    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(0, 128, 0, 0);}
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);}
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);}
+    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(255, 0, 0, 0);}
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);}
 }
