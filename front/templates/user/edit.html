@@ -135,15 +135,24 @@
                 {% for modulo in permisos %}
                 <tr>
                     <td>{{ modulo.name }}</td>
-                    <td class="has-text-centered">
-                        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_view" {% if modulo.view %}checked{% endif %}>
-                    </td>
-                    <td class="has-text-centered">
-                        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_edit" {% if modulo.edit %}checked{% endif %}>
-                    </td>
-                    <td class="has-text-centered">
-                        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_delete" {% if modulo.delete %}checked{% endif %}>
-                    </td>
+<td class="has-text-centered">
+    <label class="perm-wrapper">
+        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_view" {% if modulo.view %}checked{% endif %}>
+        <span class="perm-circle"></span>
+    </label>
+</td>
+<td class="has-text-centered">
+    <label class="perm-wrapper">
+        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_edit" {% if modulo.edit %}checked{% endif %}>
+        <span class="perm-circle"></span>
+    </label>
+</td>
+<td class="has-text-centered">
+    <label class="perm-wrapper">
+        <input type="checkbox" class="perm-check" name="{{ modulo.name }}_delete" {% if modulo.delete %}checked{% endif %}>
+        <span class="perm-circle"></span>
+    </label>
+</td>
                 </tr>
                 {% endfor %}
             </tbody>

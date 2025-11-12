@@ -258,24 +258,44 @@ input:-moz-placeholder {
     color: white;              /* texto blanco */
 }
 
-/* Checkboxes circulares */
+/* Ocultamos el checkbox real */
 .perm-check {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Contenedor clickeable */
+.perm-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Círculo visual */
+.perm-circle {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    appearance: none;
-    -webkit-appearance: none;
+    border: 2px solid #ccc;
     background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
     transition: all 0.2s ease;
 }
 
-/* Checkbox activado */
-.perm-check:checked {
-    background-color: #00bf63; /* verde */
+/* Hover visual */
+.perm-wrapper:hover .perm-circle {
     border-color: #00bf63;
 }
+
+/* Activado → verde sólido */
+.perm-check:checked + .perm-circle {
+    background-color: #00bf63;
+    border-color: #00bf63;
+}
+
+
 
 select.input {
     background-color: white;
