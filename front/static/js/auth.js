@@ -15,3 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnUser = document.getElementById("btnUser");
+
+    // Leer el user_id desde localStorage
+    const userId = localStorage.getItem("user_id");
+
+    if (userId) {
+        // Agregar evento click para redirigir al perfil del usuario
+        btnUser.addEventListener("click", () => {
+            window.location.href = `/users/${userId}/edit/`;
+        });
+    } else {
+        console.warn("No se encontró user_id en localStorage");
+    }
+});

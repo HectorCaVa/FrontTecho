@@ -1,50 +1,54 @@
-document.addEventListener("DOMContentLoaded", async function() {
-    const token = localStorage.getItem("token"); // si tu endpoint requiere token
-
-    // === 1. Obtener ID del usuario desde la URL ===
+document.addEventListener("DOMContentLoaded", async function () {
+    const token = localStorage.getItem("token");
     const pathParts = window.location.pathname.split("/");
-    const userId = pathParts[2];
+    const userId = pathParts[2]; // /users/3/edit → "3"
 
-    // === 2. Traer datos del usuario ===
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/solicitudes/usuario/lista/`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `token ${token}`
-            },
-        });
+    const checkboxes = document.querySelectorAll(".perm-check");
 
-        if (!response.ok) throw new Error("Error al obtener usuario");
+    // ========= 1. Cargar datos del usuario ============
+    async function cargarUsuario() {
+        try {
+            const response = await fetch("http://127.0.0.1:8000/solicitudes/usuario/lista/", {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${token}`
+                }
+            });
 
-        const usuarios = await response.json(); // lista completa
-        const user = usuarios.find(u => u.id == userId);
-        if (!user) throw new Error("Usuario no encontrado");
+            if (!response.ok) throw new Error("Error al obtener usuario");
 
-        // === 3. Rellenar los inputs ===
-        document.querySelector("input[name='name']").value = user.nombre || "";
-        document.querySelector("input[name='apellido_paterno']").value = user.apellido_paterno || "";
-        document.querySelector("input[name='apellido_materno']").value = user.apellido_materno || "";
-        document.querySelector("input[name='rut']").value = user.rut || "";
-        document.querySelector("input[name='email']").value = user.email || "";
-        document.querySelector("input[name='phone']").value = user.phone || "";
-        document.querySelector("input[name='birthdate']").value = user.birthdate || "";
-        document.querySelector("select[name='sexo']").value = user.sexo || "";
+            const usuarios = await response.json();
+            const user = usuarios.find(u => u.id == userId);
+            if (!user) throw new Error("Usuario no encontrado");
 
-        // Si tienes permisos, podrías cargarlos también aquí
-        // Por ahora se mantienen los que están renderizados en el template
-    } catch (error) {
-        console.error("Error al cargar usuario:", error);
-        alert("No se pudieron cargar los datos del usuario.");
+            // Rellenar inputs
+            document.querySelector("input[name='first_name']").value = user.nombre || "";
+            document.querySelector("input[name='last_name']").value = user.apellido_paterno || "";
+            document.querySelector("input[name='apellido_materno']").value = user.apellido_materno || "";
+            document.querySelector("input[name='rut']").value = user.rut || "";
+            document.querySelector("input[name='email']").value = user.email || "";
+            document.querySelector("input[name='telefono']").value = user.phone || "";
+            document.querySelector("input[name='fecha_nacimiento']").value =  user.birthdate?.split("T")[0] || "";
+            document.querySelector("select[name='sexo']").value = user.sexo || "";
+
+        } catch (error) {
+            console.error("Error al cargar usuario:", error);
+            alert("No se pudieron cargar los datos del usuario.");
+        }
     }
 
+    await cargarUsuario();
 
-    // === 5. Enviar formulario vía AJAX ===
+    // ========= 2. Enviar actualización ============
     const form = document.querySelector("form");
-    form.addEventListener("submit", async function(e) {
-        e.preventDefault(); // prevenir recarga
 
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // Convertir formulario en JSON
         const formData = new FormData(form);
-        const data = {};
+        const data = { id: userId }; // obligatorio para tu endpoint
+
         formData.forEach((value, key) => {
             data[key] = value;
         });
@@ -53,22 +57,27 @@ document.addEventListener("DOMContentLoaded", async function() {
         checkboxes.forEach(cb => {
             data[cb.name] = cb.checked;
         });
-
         try {
-            const response = await fetch(window.location.href, {
+            const response = await fetch("http://127.0.0.1:8000/solicitudes/usuario/modificar/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `token ${token}` // quitar si no necesitas
+                    "Authorization": `Token ${token}`
                 },
                 body: JSON.stringify(data)
             });
 
-            if (!response.ok) throw new Error("Error al actualizar usuario");
-
             const result = await response.json();
+
+            if (!response.ok) {
+                console.warn(result);
+                alert("Error al actualizar: " + (result.error));
+                return;
+            }
+
             alert("Usuario actualizado correctamente!");
-            window.location.href = "/users/"; // redirigir al listado
+            window.location.href = "/home/";
+
         } catch (error) {
             console.error("Error al actualizar usuario:", error);
             alert("No se pudo actualizar el usuario. Revisa la consola.");
