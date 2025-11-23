@@ -53,6 +53,8 @@ def home(request):
 def galeria(request):
     return render(request, 'galeria/index.html')
 
+def indicador_index(request):
+    return render(request, "indicador/index.html")
 
 # ------------------------------
 # VISTAS DE USUARIO

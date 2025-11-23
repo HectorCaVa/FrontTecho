@@ -188,18 +188,52 @@ document.addEventListener("DOMContentLoaded", async () => {
                 obs.textContent = b.observacion || "(sin observación)";
                 div.appendChild(obs);
 
-                if (b.documentos_adjuntos?.length) {
-                    const docsDiv = document.createElement("div");
-                    docsDiv.classList.add("bitacora-documentos");
-                    b.documentos_adjuntos.forEach(doc => {
-                        const a = document.createElement("a");
-                        a.href = doc.url_archivo;
-                        a.target = "_blank";
-                        a.textContent = "Archivo";
-                        docsDiv.appendChild(a);
-                    });
-                    div.appendChild(docsDiv);
+if (b.documentos_adjuntos?.length) {
+    const docsDiv = document.createElement("div");
+    docsDiv.classList.add("bitacora-documentos");
+
+    b.documentos_adjuntos.forEach(doc => {
+        const btn = document.createElement("button");
+        btn.classList.add("button", "is-small", "is-info", "mr-2");
+        btn.title = "Ver documento";
+
+        btn.innerHTML = `
+            <span class="icon has-text-white">
+                <i class="fas fa-download"></i>
+            </span>
+        `;
+
+        // Evento para abrir el documento igual que en la tabla de archivos del proyecto
+        btn.addEventListener("click", async () => {
+            const token = localStorage.getItem("token");
+            const viewUrl = `http://127.0.0.1:8000/solicitudes/documento/${doc.doc_id}/`;
+
+            try {
+                const response = await fetch(viewUrl, {
+                    headers: {
+                        "Authorization": `Token ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error al obtener el archivo");
                 }
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                window.open(url, "_blank");
+
+            } catch (err) {
+                alert("No se pudo mostrar el archivo");
+                console.error(err);
+            }
+        });
+
+        docsDiv.appendChild(btn);
+    });
+
+    div.appendChild(docsDiv);
+}
 
                 bitacorasChat.appendChild(div);
             });
@@ -265,6 +299,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         container.appendChild(step);
     });
 }
+// === ENVIAR NUEVA BITÁCORA ===
+document.getElementById("btnEnviarBitacora").addEventListener("click", async () => {
+    const observacion = document.getElementById("bitacoraObservacion").value.trim();
+    const archivo = document.getElementById("bitacoraArchivo").files[0];
+
+    if (!observacion) {
+        return alert("Debes escribir una observación.");
+    }
+
+    const token = localStorage.getItem("token");
+    const solicitudId = window.location.pathname.split("/")[2];
+
+    const formData = new FormData();
+    formData.append("solicitud_id", solicitudId);
+    formData.append("bsca_observacion", observacion);
+    if (archivo) formData.append("doc_archivo", archivo);
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/solicitudes/bitacora/crear/", {
+            method: "POST",
+            headers: { "Authorization": `Token ${token}` },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error(data);
+            return alert("Error al guardar la bitácora");
+        }
+
+        alert("Bitácora guardada correctamente");
+
+        // limpiar campos
+        document.getElementById("bitacoraObservacion").value = "";
+        document.getElementById("bitacoraArchivo").value = "";
+
+        // recargar las bitácoras
+        await cargarBitacoras(solicitudId);
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudo guardar la bitácora");
+    }
+});
+
 
     // === Inicializar ===
     await cargarSolicitud();

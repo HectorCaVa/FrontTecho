@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('home/', views.home, name='home'),
     path('galeria/', views.galeria, name='galeria'),
+    path('indicador/', views.indicador_index, name='indicador_index'),
 
     path('users/', views.user_index, name='user_index'),
     path('users/new/', views.user_new, name='user_new'),
@@ -18,4 +19,6 @@ urlpatterns = [
     path('projects/new/', views.project_new, name='project_new'),
     path('projects/<int:id>/edit/', views.project_edit, name='project_edit'),
     path('projects/<int:id>/info/', views.project_info, name='project_info'),
+
+    
 ]

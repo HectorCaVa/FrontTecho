@@ -6,6 +6,9 @@
     class="{% if request.path == '/proyectos/' %}is-active{% endif %}">
         <span class="icon"><i class="fas fa-project-diagram"></i></span> Proyectos
     </a>
+    <a href="{% url 'indicador_index' %}" class="{% if request.path == '/user/' %}is-active{% endif %}">
+        <span class="icon"><i class="fas fa-bar-chart"></i></span> Indicadores
+    </a>
     <a href="{% url 'user_index' %}" class="{% if request.path == '/user/' %}is-active{% endif %}">
         <span class="icon"><i class="fas fa-user"></i></span> Usuarios
     </a>

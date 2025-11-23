@@ -455,3 +455,29 @@ textarea {
     min-height: 80px; /* altura mínima uniforme */
     resize: vertical; /* permite redimensionar solo vertical */
 }
+/* Contenedor para scroll de tabla */
+.indicador-scroll-table {
+    max-height: 500px; /* Altura visible */
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+/* Scroll estilo Opera moderno */
+.indicador-scroll-table::-webkit-scrollbar {
+    width: 8px;
+}
+
+.indicador-scroll-table::-webkit-scrollbar-track {
+    border-radius: 8px;
+}
+
+.indicador-scroll-table::-webkit-scrollbar-thumb {
+    background-color: #0091dd; 
+    border-radius: 8px;
+}
+
+/* Firefox */
+.indicador-scroll-table {
+    scrollbar-width: unset;
+    scrollbar-color: #0091dd #0090dd0f;
+}

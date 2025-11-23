@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="section mt-5 mb-4 panel-indicadores">
+    <h2 class="title has-text-white has-text-centered">INDICADORES DE SOLICITUDES</h2>
+</div>
+
+<div class="container">
+
+    <!-- ==================== Fila 1 ==================== -->
+    <div class="columns">
+
+        <!-- Proyectos por mes -->
+        <div class="column is-8">
+            <div class="box indicador-box">
+                <h3 class="title is-6 has-text-centered">Proyectos por Mes</h3>
+                <canvas id="graficoMeses" height="130"></canvas>
+            </div>
+        </div>
+
+        <!-- Promedio + Estados -->
+        <div class="column is-4">
+
+            <div class="box indicador-box">
+                <h3 class="title is-6 has-text-centered">Tiempo Promedio</h3>
+                <p id="promedioCompletadas"
+                   class="has-text-centered"
+                   style="font-size:1.2rem;">-</p>
+            </div>
+
+            <div class="box indicador-box">
+                <h3 class="title is-6 has-text-centered">Proyectos por Estado</h3>
+                <canvas id="graficoEmbudo" height="150"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==================== Fila 2 ==================== -->
+    <div class="columns">
+
+        <!-- SLA > 120 -->
+        <div class="column is-4">
+            <div class="box indicador-box indicador-altura">
+                <h3 class="title is-6 has-text-centered">Proyectos Atrasados</h3>
+                <ul id="listaMas120" class="indicador-scroll"></ul>
+            </div>
+        </div>
+
+        <!-- SLA 60–120 -->
+        <div class="column is-4">
+            <div class="box indicador-box indicador-altura">
+                <h3 class="title is-6 has-text-centered">Proyectos en Riesgo</h3>
+                <ul id="lista60a120" class="indicador-scroll"></ul>
+            </div>
+        </div>
+
+        <!-- Sin comentarios 20 días -->
+        <div class="column is-4">
+            <div class="box indicador-box indicador-altura">
+                <h3 class="title is-6 has-text-centered">Proyectos sin gestión en 20 días</h3>
+                <ul id="listaSinComentarios20" class="indicador-scroll"></ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/indicador.js' %}"></script>
+{% endblock %}
