@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             data: {
                 labels: mesesOrden,
                 datasets: [{
-                    label: "Solicitudes",
+                    label: "PROYECTOS",
                     data: dataMeses,
                     tension: 0.2,
                     fill: true,
