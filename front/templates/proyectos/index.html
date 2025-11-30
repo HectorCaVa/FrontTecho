@@ -6,12 +6,12 @@
 {% block content %}
 <div class="container mt-6">
     <!-- Título + Botón Nuevo -->
-    <div class="level mb-4" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
+    <div class="level mb-4 ection mt-5 mb-4 panel-indicadores" style="background-color: #0091dd; color: white; padding: 1rem; border-radius: 8px;">
         <div class="level-left">
             <h1 class="title has-text-white">LISTADO DE PROYECTOS</h1>
         </div>
         <div class="level-right">
-            <a href="{% url 'project_new' %}" class="button" style="background-color: #fbc74a; color: white; border: 2px solid #fbc74a;">
+            <a href="{% url 'project_new' %}" class="button" style="background-color: #fbab4a; color: white; border: 2px solid #fbab4a;">
                 <span class="icon"><i class="fas fa-plus"></i></span>
             </a>
         </div>
@@ -22,7 +22,7 @@
         <div class="column">
             <div class="field">
                 <div class="control has-icons-left">
-                    <input class="input" type="text" id="searchInput" placeholder="Buscar proyectos..." style="background-color: #ffffff; color: #000;">
+                    <input class="input" type="text" id="searchInput" placeholder="Buscar proyectos..." style="background-color: #ffffff;">
                     <span class="icon is-left">
                         <i class="fas fa-search"></i>
                     </span>
@@ -32,7 +32,7 @@
         <div class="column">
             <div class="field">
                 <div class="control">
-                    <input class="input" type="date" id="dateFilter" style="background-color: #ffffff; color: #000;">
+                    <input class="input" type="date" id="dateFilter" style="background-color: #ffffff;">
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                     <button class="button is-small is-info">
                         <span class="icon"><i class="fas fa-edit"></i></span>
                     </button>
-                    <button class="button is-small" style="background-color: #fbc74a; color: white;">
+                    <button class="button is-small" style="background-color: #fbab4a; color: white;">
                         <span class="icon"><i class="fas fa-info-circle"></i></span>
                     </button>
                     <button class="button is-small is-danger">

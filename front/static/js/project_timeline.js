@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    
     const pathParts = window.location.pathname.split("/");
     const solicitudId = pathParts[2];
     if (!solicitudId) return alert("No se encontró la solicitud");
@@ -246,38 +247,36 @@ if (b.documentos_adjuntos?.length) {
         }
     }
 
-    function renderTimeline(estadoActual) {
+function renderTimeline(estadoActual) {
     const estados = ["Ingresada", "Aceptada", "Proceso", "Completa"];
     const container = document.getElementById("projectTimeline");
     container.innerHTML = "";
 
     if (!estadoActual) estadoActual = "Ingresada";
-
-    // 🔹 Convertimos todo a minúsculas para comparar sin importar el caso
     const estadoActualLower = estadoActual.toLowerCase();
 
-    // Caso especial: si es "anulado"
+    // Caso "anulado"
     if (estadoActualLower === "anulado") {
         estados.forEach((estado, i) => {
             const step = document.createElement("div");
             step.classList.add("step", "anulado");
+
             step.innerHTML = `
-                <div class="circle pulsing">${i + 1}</div>
+                <div class="circle pulsing"></div>
                 <div class="label">${estado}</div>
-                <div class="connector red"></div>
+                ${i < estados.length - 1 ? `<div class="connector red"></div>` : ""}
             `;
+
             container.appendChild(step);
         });
         return;
     }
 
+    const indexActual = estados.findIndex(e => e.toLowerCase() === estadoActualLower);
+
     estados.forEach((estado, i) => {
         const step = document.createElement("div");
         step.classList.add("step");
-
-        // 🔹 Comparaciones en minúsculas
-        const estadoLower = estado.toLowerCase();
-        const indexActual = estados.findIndex(e => e.toLowerCase() === estadoActualLower);
 
         let circleClass = "";
         let connectorClass = "connector future";
@@ -285,15 +284,14 @@ if (b.documentos_adjuntos?.length) {
         if (i < indexActual) {
             circleClass = "active";
             connectorClass = "connector completed";
-        } else if (estadoLower === estadoActualLower) {
+        } else if (i === indexActual) {
             circleClass = "active pulsing";
-            connectorClass = "connector future";
         }
 
         step.innerHTML = `
             <div class="circle ${circleClass}"></div>
             <div class="label">${estado}</div>
-            <div class="${connectorClass}"></div>
+            ${i < estados.length - 1 ? `<div class="${connectorClass}"></div>` : ""}
         `;
 
         container.appendChild(step);

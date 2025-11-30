@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     color = "#555555"; break;
                 case "ACEPTADA":
                 case "PROCESO":
-                    color = "#fbc74a"; break;
+                    color = "#fbab4a"; break;
                 case "COMPLETA":
                     color = "#00bf63"; break;
                 case "ANULADO":
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (diffDias <= 60) {
                 diasColor = "#00bf63"; // verde
             } else if (diffDias <= 89) {
-                diasColor = "#fbc74a"; // naranjo
+                diasColor = "#fbab4a"; // naranjo
             } else {
                 diasColor = "#ff5757"; // rojo
             }
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     </a>
 
                     <a href="/projects/${item.sca_id}/info/" class="button is-small" 
-                       style="background-color:#fbc74a; color:white; border:2px solid #fbc74a;">
+                       style="background-color:#fbab4a; color:white; border:2px solid #fbab4a;">
                         <span class="icon"><i class="fas fa-info-circle" style="color:white;"></i></span>
                     </a>
 

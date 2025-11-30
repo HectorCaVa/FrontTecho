@@ -1,124 +1,215 @@
+
+:root {
+    /* -----------------------------------
+       Colores base (fondos y superficies)
+    ----------------------------------- */
+    --color-bg: #f3f7fa;                /* Fondo muy claro estilo TECHO */
+    --color-bg-light: #ffffff;          /* Superficie limpia blanca */
+    --placeholder-color: #9bb8c9;       /* Gris celeste suave */
+
+    /* -----------------------------------
+       Paleta principal (corporativa TECHO)
+    ----------------------------------- */
+    --color-primary: #009fe3;           /* Azul TECHO */
+    --color-primary-hover: #94a8b4;     /* Azul TECHO profundo */
+    --color-accent: #ffb347;            /* Naranjo complementario */
+
+    /* -----------------------------------
+       Estados
+    ----------------------------------- */
+    --color-success: #27c18f;           /* Verde éxito */
+    --color-danger: #e84b4b;            /* Rojo accesible */
+    --color-danger-dark: #b73636;       /* Rojo profundo */
+    --color-neutral-dark: #1b2a33;      /* Texto oscuro */
+    --color-neutral-mid: #5d7480;       /* Texto medio */
+    --color-neutral-light: #dfe8ed;     /* Gris claro azulado */
+
+    /* -----------------------------------
+       Texto
+    ----------------------------------- */
+    --text-light: #ffffff;
+    --text-dark: #1b2a33;               /* Oscuro moderno */
+    --text-mid: #5d7480;
+
+    /* -----------------------------------
+       Bordes
+    ----------------------------------- */
+    --border-light: #dce7ed;
+    --border-mid: #aac3d1;
+
+    /* -----------------------------------
+       UI
+    ----------------------------------- */
+    --radius: 8px;
+    --radius-small: 6px;
+
+    /* -----------------------------------
+       Transiciones
+    ----------------------------------- */
+    --transition-fast: 0.2s ease;
+    --transition: 0.3s ease;
+
+    /* -----------------------------------
+       Sombras
+    ----------------------------------- */
+    --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.12);
+
+    /* -----------------------------------
+       Check redondeado (switch tipo permiso)
+    ----------------------------------- */
+    --check-bg: #ffffff;
+    --check-border: #aac3d1;
+    --check-size: 20px;
+    --check-radius: 50%;
+    --check-active-bg: #009fe3;
+    --check-active-border: #007cb8;
+    --check-icon-color: #ffffff;
+
+    /* -----------------------------------
+       Estilos del check perm-circle
+    ----------------------------------- */
+    --perm-size: 20px;
+    --perm-border: #aac3d1;
+    --perm-bg: #f3f7fa;
+
+    --perm-hover-border: #009fe3;
+
+    --perm-active-bg: #009fe3;
+    --perm-active-border: #009fe3;
+    /* Inputs de archivo */
+    --file-bg: var(--color-bg-light);
+    --file-border: var(--border-mid);
+    --file-hover-bg: var(--color-primary-hover);
+    --file-hover-border: var(--color-primary);
+    --file-text: var(--text-light);
+    --file-icon-color: var(--color-accent);
+}
+/* -----------------------------------
+         BASE GLOBAL
+----------------------------------- */
 body {
-    background-color: #c8cad5; /* 👈 color de fondo */
+    background-color: var(--color-bg);
+    font-family: "Inter", sans-serif;
+    color: var(--text-dark);
     min-height: 100vh;
-    transition: margin-left 0.3s;
+    transition: margin-left var(--transition);
 }
 
-/* Header */
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+/* -----------------------------------
+            HEADER
+----------------------------------- */
 .header {
-    background-color: #0091dd;
+    background-color: var(--color-primary);
+    color: var(--text-light);
     height: 60px;
-    color: white;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* izquierda y derecha */
+    justify-content: space-between;
     padding: 0 1rem;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     z-index: 40;
 }
-/* Secciones internas del header */
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* espacio entre burger y TECHO */
-}
 
+.header-left,
 .header-right {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Burger button */
+/* Burger */
 .burger {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    z-index: 100;
 }
 .burger span {
-    display: block;
     width: 25px;
     height: 3px;
-    background-color: white;
+    background-color: var(--text-light);
     margin: 3px 0;
-    transition: 0.4s;
+    transition: var(--transition);
 }
-/* Botones de usuario y salir */
+
+/* -----------------------------------
+            BOTONES
+----------------------------------- */
 .btn-user,
 .btn-logout {
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-small);
     padding: 6px 10px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: var(--transition-fast);
 }
 
 .btn-user {
-    background-color: #ffffff;
-    color: #0091dd;
+    background-color: var(--text-light);
+    color: var(--color-primary);
 }
-
 .btn-user:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-neutral-light);
     transform: scale(1.05);
 }
 
 .btn-logout {
-    background-color: #e74c3c;
-    color: white;
+    background-color: var(--color-danger);
+    color: var(--text-light);
 }
-
 .btn-logout:hover {
-    background-color: #c0392b;
+    background-color: var(--color-danger-dark);
     transform: scale(1.05);
 }
-/* Sidebar */
+
+/* -----------------------------------
+            SIDEBAR
+----------------------------------- */
 .sidebar {
-    background-color: #e3ecf5;
-    min-height: 100vh;
-    padding-top: 1rem;
+    background-color:  #e3ecf5;
     width: 220px;
     position: fixed;
-    top: 60px; /* debajo del header */
+    top: 60px;
     left: 0;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-    z-index: 30;
+    min-height: 100vh;
+    padding-top: 1rem;
+    transition: transform var(--transition);
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
 }
 
 .sidebar a {
     display: flex;
     align-items: center;
     padding: 0.75rem 1rem;
-    color: #333;
+    color: var(--color-neutral-dark);
     font-weight: bold;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition);
 }
 
 .sidebar a:hover,
 .sidebar a.is-active {
-    background-color: #fbc74a;
-    color: white;
+    background-color: var(--color-accent);
+    color: var(--text-light);
 }
 
-/* Ocultar sidebar */
-.sidebar.hidden {
-    transform: translateX(-100%);
-}
-
-/* Main content */
+/* -----------------------------------
+       CONTENIDO PRINCIPAL
+----------------------------------- */
 .main-content {
-    background-color: #c8cad5; /* mantiene el mismo color que el fondo */
     margin-left: 220px;
     padding: 2rem;
     padding-top: 80px;
-    transition: margin-left 0.3s;
+    transition: margin-left var(--transition);
 }
 
 body.sidebar-hidden .main-content {
@@ -126,7 +217,7 @@ body.sidebar-hidden .main-content {
 }
 
 /* Responsive */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .sidebar {
         transform: translateX(-100%);
     }
@@ -135,349 +226,353 @@ body.sidebar-hidden .main-content {
     }
     .main-content {
         margin-left: 0;
-        padding-top: 80px;
     }
 }
 
+/* -----------------------------------
+             CAROUSEL
+----------------------------------- */
 .carousel {
     position: relative;
     overflow: hidden;
-    width: 100%;
-    max-width: 100%;
-    height: 200px; /* altura fija para todas las imágenes */
-    margin: 0 auto;
-    border-radius: 8px;
+    height: 200px;
+    border-radius: var(--radius);
 }
-
 .carousel-item {
     position: absolute;
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity var(--transition);
 }
-
-.carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* asegura que la imagen llene el cuadro sin deformarse */
-    border-radius: 8px;
-}
-
-/* La primera imagen visible */
 .carousel-item:first-child {
     opacity: 1;
 }
-/* Resumen de proyectos */
-.section .box {
-    border-radius: 8px;
-    padding: 2rem;
-    transition: transform 0.2s;
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
 }
 
+/* -----------------------------------
+        CARDS / SECCIONES
+----------------------------------- */
+.section .box {
+    padding: 2rem;
+    border-radius: var(--radius);
+    transition: transform var(--transition-fast);
+    box-shadow: var(--shadow-soft);
+}
 .section .box:hover {
     transform: translateY(-5px);
 }
-/* Placeholder del input de búsqueda */
-#searchInput::placeholder {
-    color: #c8cad5;  /* negro para que se note más */
-    opacity: 1;       /* fuerza la visibilidad */
-}
-/* Color del placeholder para inputs */
-input::placeholder {
-    color: #c8cad5; /* el color que quieras */
-    opacity: 1; /* importante para que se vea consistente */
+
+/* -----------------------------------
+     FORMULARIOS (input/select)
+----------------------------------- */
+input,
+select,
+textarea {
+    background-color: var(--text-light) !important;
+    color: var(--color-neutral-mid) !important;
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-small);
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    transition: var(--transition);
 }
 
-/* Para compatibilidad con algunos navegadores antiguos */
-input::-webkit-input-placeholder {
-    color: #c8cad5;
-}
-input::-moz-placeholder {
-    color: #c8cad5;
-}
-input:-ms-input-placeholder {
-    color: #c8cad5;
-}
-input:-moz-placeholder {
-    color: #c8cad5;
-}
-/* Inputs de user/new.html */
-.container input.input {
-    background-color: #ffffff !important; /* fondo blanco */
-    color: #c8cad5 !important; /* texto negro */
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-neutral-mid) !important;
 }
 
-/* Placeholder */
-.container input.input::placeholder {
-    color: #c8cad5 !important; /* gris para placeholder */
-    opacity: 1 !important;
+/* Focus */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px rgba(0, 145, 221, 0.5);
 }
 
-/* Compatibilidad navegadores */
-.container input.input::-webkit-input-placeholder {
-    color: #c8cad5 !important;
-}
-.container input.input::-moz-placeholder {
-    color: #c8cad5 !important;
-}
-.container input.input:-ms-input-placeholder {
-    color: #c8cad5 !important;
-}
-.container input.input:-moz-placeholder {
-    color: #c8cad5 !important;
-}
-
-
-/* Tabla completa */
+/* -----------------------------------
+              TABLAS
+----------------------------------- */
 .table.is-fullwidth {
-    background-color: transparent; /* tabla sin fondo */
-    border-collapse: collapse;     /* eliminar bordes extra */
+    border-collapse: separate;        /* Para permitir redondeo */
+    border-spacing: 0 6px;            /* Separación entre filas */
+    width: 100%;
+    background: transparent;
 }
 
-/* Encabezados (primera fila) */
+/* Encabezado */
 .table.is-fullwidth thead th {
-    background-color: #0091dd; /* azul */
-    color: white;              /* texto blanco */
-    border: none;              /* sin bordes */
-    text-align: left;
+    background-color: var(--color-primary);
+    color: var(--text-light);
     padding: 0.75rem 1rem;
+    border: none;
+    font-weight: 600;
 }
 
-/* Filas del tbody (celdas transparentes) */
+/* Filas del cuerpo */
+.table.is-fullwidth tbody tr {
+    background: #fff;
+    transition: transform 0.15s ease, 
+                box-shadow 0.15s ease,
+                background-color 0.2s ease;
+}
+
+/* Redondeo por FILA */
+.table.is-fullwidth tbody tr td:first-child {
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+}
+.table.is-fullwidth tbody tr td:last-child {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+}
+
+/* Celdas */
 .table.is-fullwidth tbody td {
-    background-color: transparent; /* sin fondo */
-    color: black;                  /* texto negro */
-    border: none;                  /* sin divisores */
+    color: var(--text-dark);
     padding: 0.75rem 1rem;
+    border: none;
 }
 
-/* Hover sobre filas */
+/* Hover con tu efecto indicador-box */
+.table.is-fullwidth tbody tr:hover {
+    background-color: #94a8b4 !important;
+}
 .table.is-fullwidth tbody tr:hover td {
-    background-color: #c8cad5; /* amarillo al pasar mouse */
-    color: white;              /* texto blanco */
+    color: var(--text-light);
 }
 
+/* Scroll */
+.indicador-scroll-table {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.indicador-scroll-table::-webkit-scrollbar {
+    width: 8px;
+}
+.indicador-scroll-table::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: var(--radius);
+}
+
+/* -----------------------------------
+             TIMELINE
+----------------------------------- */
+.project-timeline {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--color-neutral-mid);
+    margin: 0 auto;
+    transition: var(--transition);
+}
+
+.circle.active {
+    background-color: var(--color-success);
+}
+.circle.pulsing {
+    background-color: var(--color-accent);
+    animation: pulse 1.5s infinite;
+}
+
+.connector {
+    height: 4px;
+    width: 100%;
+    background-color: var(--color-neutral-mid);
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transition: var(--transition);
+}
+
+.connector.completed {
+    background-color: var(--color-success);
+}
+.connector-next {
+    background-color: var(--color-accent);
+}
+
+.project-timeline.red .circle,
+.project-timeline.red .connector {
+    background-color: var(--color-danger) !important;
+}
+
+/* Animación */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: .7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* === CHECK PERSONALIZADO === */
+.check {
+  width: var(--check-size);
+  height: var(--check-size);
+  border-radius: var(--check-radius);
+  border: 2px solid var(--check-border);
+  background-color: var(--check-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+  user-select: none;
+}
+
+/* Estado activo */
+.check.active {
+  background-color: var(--check-active-bg);
+  border-color: var(--check-active-border);
+}
+
+/* Icono interno (si lo usas) */
+.check svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--check-icon-color);
+  stroke-width: 3px;
+}
 /* Ocultamos el checkbox real */
 .perm-check {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
 }
 
-/* Contenedor clickeable */
+/* Contenedor */
 .perm-wrapper {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
 }
 
 /* Círculo visual */
 .perm-circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    background-color: #f0f0f0;
-    transition: all 0.2s ease;
+  width: var(--perm-size);
+  height: var(--perm-size);
+  border-radius: 50%;
+  border: 2px solid var(--perm-border);
+  background-color: var(--perm-bg);
+  transition: all 0.2s ease;
 }
 
-/* Hover visual */
+/* Hover */
 .perm-wrapper:hover .perm-circle {
-    border-color: #00bf63;
+  border-color: var(--perm-hover-border);
 }
 
 /* Activado → verde sólido */
 .perm-check:checked + .perm-circle {
-    background-color: #00bf63;
-    border-color: #00bf63;
+  background-color: var(--perm-active-bg);
+  border-color: var(--perm-active-border);
 }
-
-
-
-select.input {
-    background-color: white;
-    color: c8cad5;
-}
-.select select {
-    background-color: white !important;
-    color: c8cad5 !important;
-}
-/*timeline*/
-
-.project-timeline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  position: relative;
-}
-
-.project-timeline .step {
-  text-align: center;
-  position: relative;
-  flex: 1;
-}
-
-.project-timeline .circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #555; /* gris oscuro por defecto */
-  margin: 0 auto;
-  z-index: 1; /* siempre arriba de la línea */
-  position: relative;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.project-timeline .connector {
-  position: absolute;
-  top: 50%; /* alineado vertical con el centro del círculo */
-  left: 50%;
-  width: 100%;
-  height: 4px;
-  background-color: #555; /* gris por defecto */
-  z-index: 0; /* detrás del círculo */
-  transform: translateX(0%) translateY(-50%);
-  transition: background-color 0.3s;
-}
-
-.project-timeline .label {
-  margin-top: 8px;
-  color: #000;
-  font-weight: 500;
-}
-
-/* Conectores entre pasos */
-.project-timeline .connector {
-  position: absolute;
-  top: 15px; /* mitad del círculo */
-  left: 50%;
-  width: 100%;
-  height: 4px;
-  background-color: #555; /* gris por defecto */
-  z-index: 0;
-  transform: translateX(0%);
-  transition: background-color 0.3s;
-}
-
-/* Animación de pulso */
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Círculos */
-.circle.active {
-  background-color: #4caf50;
-}
-
-.circle.pulsing {
-  background-color: #fbc74a;
-  animation: pulse 1.5s infinite; /* solo círculo */
-}
-
-/* Conectores */
-.connector.completed {
-  background-color: #4caf50;
-}
-
-.connector.connector-next {
-  background-color: #fbc74a; /* sin animación */
-}
-
-.connector.future {
-  background-color: #555;
-}
-
-/* Anulado */
-.project-timeline.red .circle,
-.project-timeline.red .connector {
-  background-color: #f44336 !important;
-}
-
-/* === Estilo unificado para todos los campos de formulario === */
-input,
-select,
-textarea {
-    background-color: #ffffff !important; /* mismo fondo que tus inputs */
-    color: #c8cad5 !important;           /* mismo color de texto que tus inputs */
-    border: 1px solid #ccc;              /* borde suave */
-    border-radius: 6px;                  /* borde redondeado */
-    padding: 0.5rem 0.75rem;             /* padding interno */
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
-}
-
-/* Placeholder */
+/* Placeholder universal */
 input::placeholder,
-textarea::placeholder {
-    color: #c8cad5 !important;
-    opacity: 1 !important;
+textarea::placeholder,
+select::placeholder {
+  color: var(--placeholder-color) !important;
+  opacity: 1 !important;
 }
 
 /* Compatibilidad navegadores antiguos */
 input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder { color: #c8cad5 !important; }
+textarea::-webkit-input-placeholder,
+select::-webkit-input-placeholder {
+  color: var(--placeholder-color) !important;
+}
+
 input::-moz-placeholder,
-textarea::-moz-placeholder { color: #c8cad5 !important; }
+textarea::-moz-placeholder,
+select::-moz-placeholder {
+  color: var(--placeholder-color) !important;
+}
+
 input:-ms-input-placeholder,
-textarea:-ms-input-placeholder { color: #c8cad5 !important; }
+textarea:-ms-input-placeholder,
+select:-ms-input-placeholder {
+  color: var(--placeholder-color) !important;
+}
+
 input:-moz-placeholder,
-textarea:-moz-placeholder { color: #c8cad5 !important; }
+textarea:-moz-placeholder,
+select:-moz-placeholder {
+  color: var(--placeholder-color) !important;
+}
+/* ------------------------------------------------
+                BOTONES (hover efecto)
+------------------------------------------------ */
+button,
+.button {
+    transition: transform 0.15s ease, 
+                box-shadow 0.15s ease,
+                background-color var(--transition);
+    border-radius: var(--radius);
+}
 
-/* Focus (cuando el usuario escribe) */
-input:focus,
-select:focus,
-textarea:focus {
+/* Hover efecto tipo indicador-box */
+button:hover,
+.button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px var(--color-shadow-strong);
+}
+/* -----------------------------------
+   INPUT FILE — Estilo Mejorado
+----------------------------------- */
+input[type="file"] {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    background-color: var(--color-bg-light);
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    width: 100%;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+/* Hover */
+input[type="file"]:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-bg);
+}
+
+/* Cuando se enfoca */
+input[type="file"]:focus {
     outline: none;
-    border-color: #0091dd; /* borde azul al seleccionar */
-    box-shadow: 0 0 5px rgba(0, 145, 221, 0.5);
-    background-color: #ffffff;
-    color: #c8cad5;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 4px var(--color-primary);
 }
 
-/* Selects estilo uniforme con Bulma */
-.select select {
-    background-color: #ffffff !important;
-    color: #c8cad5 !important;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
+/* Texto del placeholder (nombre del archivo antes de seleccionarlo) */
+input[type="file"]::file-selector-button {
+    background-color: var(--color-primary);
+    color: var(--text-light);
+    padding: 0.45rem 0.75rem;
+    border: none;
+    border-radius: var(--radius-small);
+    cursor: pointer;
+    transition: var(--transition-fast);
 }
 
-/* Textarea */
-textarea {
-    min-height: 80px; /* altura mínima uniforme */
-    resize: vertical; /* permite redimensionar solo vertical */
-}
-/* Contenedor para scroll de tabla */
-.indicador-scroll-table {
-    max-height: 500px; /* Altura visible */
-    overflow-y: auto;
-    border-radius: 8px;
-}
-
-/* Scroll estilo Opera moderno */
-.indicador-scroll-table::-webkit-scrollbar {
-    width: 8px;
-}
-
-.indicador-scroll-table::-webkit-scrollbar-track {
-    border-radius: 8px;
-}
-
-.indicador-scroll-table::-webkit-scrollbar-thumb {
-    background-color: #0091dd; 
-    border-radius: 8px;
-}
-
-/* Firefox */
-.indicador-scroll-table {
-    scrollbar-width: unset;
-    scrollbar-color: #0091dd #0090dd0f;
+/* Hover del botón */
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--color-primary-hover);
 }

@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 datasets: [{
                     label: "Cantidad",
                     data: countsEstado,
-                    backgroundColor: ["#0091dd", "#fbc74a", "#f7941d", "#00bf63"]
+                    backgroundColor: ["#0091dd", "#fbab4a", "#f7941d", "#00bf63"]
                 }]
             },
             options: {

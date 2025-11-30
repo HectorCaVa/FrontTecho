@@ -1,228 +1,261 @@
-/*bitacora*/
+/* ===========================
+   VARIABLES — BITÁCORA & TIMELINE
+   =========================== */
+:root {
+  /* bitácora */
+  --bit-border: #dddddd;
+  --bit-bg: #f3f7fa;
+  --bit-msg-bg: #94a8b4;
+  --bit-header-color: #e6f7ff;
+  --bit-text-color: #e6f7ff;
+  --bit-link-color: #0091dd;
+
+  /* timeline */
+  --tl-circle-bg: #cccccc;
+  --tl-connector-bg: #cccccc;
+  --tl-active: #00c853;       /* verde */
+  --tl-anulado: #f44336;      /* rojo */
+
+  /* OJO — YA NO USAMOS TRANSPARENCIAS */
+  --tl-pulse-green: #00c853;
+  --tl-pulse-red: rgb(255, 76, 91);
+
+  /* global */
+  --radius: 8px;
+  --shadow-soft: 0 2px 6px rgba(0,0,0,0.12);
+  --shadow-strong: 0 6px 18px rgba(0,0,0,0.18);
+
+  --bit-max-height: 400px;
+  --tl-circle-size: 38px;
+  --tl-connector-width: 50px;
+
+  --tran-slow: 0.3s;
+  --tran-fast: 0.18s;
+
+  /* colores UI globales usados por timeline */
+  --border-mid: #bfc7d1;
+  --text-light: #ffffff;
+  --text-mid: #6b7886;
+
+  --color-success: #27c190;
+  --color-danger: #ff4c5b;
+  --color-danger-dark: #d73441;
+}
+
+/* ===========================
+   BITÁCORA
+   =========================== */
 .bitacoras-chat {
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+  max-height: var(--bit-max-height);
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid var(--bit-border);
+  border-radius: var(--radius);
+  background-color: var(--bit-bg);
+  box-shadow: var(--shadow-soft);
+  /* Nuevo: Scrollbar personalizado para navegadores modernos */
+  scrollbar-width: thin;
+  scrollbar-color: var(--bit-border) var(--bit-bg);
 }
-
+.bitacoras-chat::-webkit-scrollbar {
+  width: 8px;
+}
+.bitacoras-chat::-webkit-scrollbar-track {
+  background: var(--bit-bg);
+}
+.bitacoras-chat::-webkit-scrollbar-thumb {
+  background: var(--bit-border);
+  border-radius: 4px;
+}
 .bitacora-message {
-    margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background-color: #e0e7ff;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background-color: var(--bit-msg-bg);
+  transition: transform var(--tran-fast), box-shadow var(--tran-fast);
+  /* Nuevo: Hover sutil */
+  cursor: pointer;
 }
 
+.bitacora-message:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
 .bitacora-header {
-    font-size: 0.85rem;
-    color: #555;
-    margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--bit-header-color);
+  margin-bottom: 0.25rem;
+  font-weight: 600; /* Nuevo: Mejor legibilidad */
 }
-
 .bitacora-observacion {
-    font-size: 1rem;
-    color: #222;
+  font-size: 1rem;
+  color: var(--bit-text-color);
+  line-height: 1.4; /* Nuevo: Mejor espaciado */
 }
 
 .bitacora-documentos a {
-    display: inline-block;
-    margin-top: 0.25rem;
-    margin-right: 0.25rem;
-    font-size: 0.85rem;
-    color: #0091dd;
-    text-decoration: underline;
+  display: inline-block;
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--bit-link-color);
+  text-decoration: underline;
+  transition: color var(--tran-fast);
+  border-radius: 4px;
+  outline: none;
 }
-/*timeline*/
-.project-timeline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    position: relative;
-}
-
-.step {
-    text-align: center;
-    flex: 1;
-    position: relative;
+.bitacora-documentos a:hover,
+.bitacora-documentos a:focus {
+  color: var(--bit-link-hover);
+  background-color: rgba(0, 145, 221, 0.1); /* Nuevo: Resaltado sutil */
 }
 
-.step .circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #ccc;
-    margin: 0 auto;
-    line-height: 30px;
-    color: white;
-    font-weight: bold;
-}
-
-.step .label {
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-}
-
-.step .connector {
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    width: 100%;
-    height: 4px;
-    background-color: #ccc;
-    z-index: -1;
-}
-
-.step:last-child .connector {
-    display: none;
-}
-
-.step.active .circle {
-    background-color: #00c853; /* verde */
-}
-
-.step.completed .connector {
-    background-color: #00c853; /* verde */
-}
-
-.step.future .circle {
-    background-color: #ccc;
-}
-
-.step.anulado .circle {
-    background-color: #f44336; /* rojo */
-}
-
-.step.anulado .connector {
-    background-color: #f44336;
-}
-.step {
-    display: inline-block;
-    text-align: center;
-    position: relative;
-    margin-right: 30px;
-}
-
-.circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #ccc;
-    margin: 0 auto;
-    line-height: 30px;
-    color: white;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.circle.active {
-    background-color: green;
-}
-
-.circle.pulsing {
-    animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0.7);}
-    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(0, 128, 0, 0);}
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);}
-}
-
-.connector {
-    position: absolute;
-    top: 15px;
-    left: 100%;
-    width: 50px;
-    height: 4px;
-    background-color: #ccc;
-}
-
-.connector.completed {
-    background-color: green;
-}
-
-.connector.future {
-    background-color: #ccc;
-}
-
-.connector.red {
-    background-color: red;
-}
-
-.step.anulado .circle {
-    background-color: red;
-    animation: pulse-red 1.2s infinite;
-}
-
-@keyframes pulse-red {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);}
-    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(255, 0, 0, 0);}
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);}
-}
-/* Contenedor timeline */
+/* ===========================
+   TIMELINE PRO 2.0
+   =========================== */
 #projectTimeline {
     position: relative;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 30px 0;
+    margin: 2rem 0;
+    padding: 1rem 0;
 }
 
 /* Línea base */
 .timeline-line {
     position: absolute;
-    top: 15px; /* mitad de la altura de los círculos */
-    left: 0;
-    right: 0;
+    top: 22px;
+    left: 5%;
+    right: 5%;
     height: 4px;
-    background-color: #ccc;
+    background-color: var(--border-mid);
+    border-radius: 4px;
     z-index: 1;
+    opacity: 0.4;
 }
 
 /* Paso */
 .step {
     position: relative;
-    text-align: center;
     flex: 1;
-    z-index:2;
-}
-
-.circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #ccc;
-    margin: 0 auto;
-    line-height: 30px;
-    color: white;
-    font-weight: bold;
+    text-align: center;
     z-index: 2;
-    position: relative;
 }
 
-.circle.pulsing {
-    animation: pulse 1.2s infinite;
-}
-
-.circle.pulsing-red {
-    animation: pulse-red 1.2s infinite;
-}
-
-.label {
-    margin-top: 8px;
+/* Círculo */
+.circle {
+    width: var(--tl-circle-size);
+    height: var(--tl-circle-size);
+    border-radius: 50%;
+    margin: 0 auto;
+    background-color: var(--tl-circle-bg);
+    color: var(--text-light);
     font-weight: bold;
+    line-height: var(--tl-circle-size);
+    font-size: 0.9rem;
+    transition: transform var(--tran-slow), background-color var(--tran-slow);
+    box-shadow: 0 0 6px rgba(0,0,0,0.25);
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0.7);}
-    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(0, 128, 0, 0);}
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 128, 0, 0);}
+/* Texto etiqueta */
+.label {
+    margin-top: 0.5rem;
+    color: var(--text-mid);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: color var(--tran-slow);
+}
+
+/* Activo */
+.circle.active {
+    background-color: var(--color-success);
+    transform: scale(1.1);
+}
+
+/* Conector */
+.connector {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 100%;
+    height: 4px;
+    background-color: var(--tl-connector-bg);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+/* Completado */
+.connector.completed {
+    background-color: var(--color-success) !important;
+    opacity: 1;
+}
+
+/* Futuro */
+.connector.future {
+    background-color: var(--border-mid);
+    opacity: 0.4;
+}
+
+/* ===========================
+   PULSO — SIEMPRE SÓLIDO
+   =========================== */
+.pulsing {
+    animation: pulse-green 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 8px 4px var(--tl-pulse-green);
+    }
+    50% {
+        transform: scale(1.20);
+        box-shadow: 0 0 14px 6px var(--tl-pulse-green);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 8px 4px var(--tl-pulse-green);
+    }
+}
+
+/* ANULADO */
+.step.anulado .circle {
+    background-color: var(--color-danger);
+    animation: pulse-red 2.2s infinite ease-in-out;
+}
+
+.step.anulado .label {
+    color: var(--color-danger-dark);
+}
+
+.connector.red {
+    background-color: var(--color-danger);
 }
 
 @keyframes pulse-red {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);}
-    70% { transform: scale(1.2); box-shadow: 0 0 10px 10px rgba(255, 0, 0, 0);}
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);}
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 8px 4px var(--tl-pulse-red);
+    }
+    50% {
+      transform: scale(1.20);
+      box-shadow: 0 0 14px 6px var(--tl-pulse-red);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 8px 4px var(--tl-pulse-red);
+    }
+}
+
+/* ===========================
+   UTIL — HOVER EFECTO
+   =========================== */
+.lift-hover {
+  transition: transform var(--tran-fast), box-shadow var(--tran-fast);
+}
+
+.lift-hover:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-strong);
 }

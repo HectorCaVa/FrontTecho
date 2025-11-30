@@ -1,94 +1,138 @@
-/* ====== CAJA PRINCIPAL DEL PANEL ===== */
+/* =========================================================
+   VARIABLES DE COLOR
+   ========================================================= */
+:root {
+    --color-principal: #0092dd;          /* Azul petróleo profundo */
+    --color-principal-hover: #004e66;    /* Azul aún más denso */
+    --color-texto: #e6f7ff;              /* Blanco azulado suave */
+
+    --color-box-fondo: #94a8b4; /* Transparente oceánico */
+
+    --color-sla-rojo: #ff4c5b;           /* Rojo vibrante pero no saturado */
+    --color-sla-naranja: #ffb347;        /* Naranjo suave premium */
+
+    --color-shadow-light: rgba(0,0,0,0.25);
+    --color-shadow-strong: rgba(0,0,0,0.45);
+}
+
+
+/* =========================================================
+   CAJA PRINCIPAL DEL PANEL
+   ========================================================= */
 .panel-indicadores {
-    background:#0091dd !important;
-    border-radius:8px;
-    padding:1.5rem;
-    color: #ffffff !important;
+    background: var(--color-principal) !important;
+    border-radius: 8px;
+    padding: 1.5rem;
+    color: var(--color-texto) !important;
 }
 
-/* ====== ESTILOS DE LAS BOX ===== */
+/* =========================================================
+   BOX
+   ========================================================= */
 .indicador-box {
-    background:#77777758  !important; 
-    border-radius:8px !important;
-    color:#ffffff !important; 
+    background: var(--color-box-fondo) !important;
+    border-radius: 8px !important;
+    color: var(--color-texto) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* ====== TITULOS ===== */
+/* Hover para resaltar */
+.indicador-box:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px var(--color-shadow-strong);
+}
+
+/* =========================================================
+   TITULOS
+   ========================================================= */
 .indicador-box h3,
 .indicador-box h4,
 .indicador-box h5 {
-    color:#ffffff !important;
+    color: var(--color-texto) !important;
     font-weight: bold !important;
-    background:#0091dd !important;
-    border-radius:8px;
-    padding:0.4Rem;
+    background: var(--color-principal) !important;
+    border-radius: 8px;
+    padding: 0.4rem;
 }
 
-/* ====== ALTURA UNIFORME PARA LAS BOX ===== */
+/* =========================================================
+   ALTURA UNIFORME
+   ========================================================= */
 .indicador-altura {
     height: 650px !important;
     display: flex !important;
     flex-direction: column !important;
 }
 
-/* ====== BADGES DE SLA ===== */
+/* =========================================================
+   CONTENEDOR SCROLL
+   ========================================================= */
 .indicador-scroll {
     display: flex;
-    flex-direction: column; /* cada badge en su fila */
+    flex-direction: column;
     gap: 10px;
     padding: 10px;
     overflow-y: auto;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-principal) transparent;
 }
 
-/* ====== LI dentro de la lista ===== */
+/* LI */
 .indicador-scroll li {
     list-style: none;
     width: 100%;
 }
 
-/* ====== BADGES (span) ===== */
-.sla-rojo, .sla-naranja {
-    display: block; /* full width */
-    width: 100%;    
+/* =========================================================
+   BADGES
+   ========================================================= */
+.sla-rojo,
+.sla-naranja {
+    display: block;
+    width: 100%;
     padding: 12px;
     border-radius: 8px;
     font-weight: bold;
     font-size: 0.95rem;
-    color: white !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: var(--color-texto) !important;
+    box-shadow: 0 2px 6px var(--color-shadow-light);
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: left;
 }
 
-.sla-rojo { background: #ff5757; }
-.sla-naranja { background: #ff9f1c; }
-
-.sla-rojo:hover, .sla-naranja:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+.sla-rojo {
+    background: var(--color-sla-rojo);
 }
 
-/* ====== SCROLLBAR PERSONALIZADO ===== */
+.sla-naranja {
+    background: var(--color-sla-naranja);
+}
+
+.sla-rojo:hover,
+.sla-naranja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--color-shadow-strong);
+}
+
+/* =========================================================
+   SCROLLBAR (CHROME)
+   ========================================================= */
 .indicador-scroll::-webkit-scrollbar {
-    width: 10px;             /* ancho del scroll */
+    width: 10px;
 }
 
 .indicador-scroll::-webkit-scrollbar-track {
-    background: transparent;  /* fondo transparente */
+    background: transparent;
 }
 
 .indicador-scroll::-webkit-scrollbar-thumb {
-    background-color: #0091dd;  /* color del thumb */
-    border-radius: 10px;         /* redondeado */
-    border: 2px solid transparent; /* separa un poco del borde */
+    background-color: var(--color-principal);
+    border-radius: 10px;
+    border: 2px solid transparent;
 }
 
 .indicador-scroll::-webkit-scrollbar-thumb:hover {
-    background-color: #0077bb;   /* color hover */
-}
-
-/* Para Firefox */
-.indicador-scroll {
-    scrollbar-width: thin;
-    scrollbar-color: #0091dd transparent;
+    background-color: var(--color-principal-hover);
 }
